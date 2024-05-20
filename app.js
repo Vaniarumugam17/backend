@@ -1,6 +1,21 @@
+// Import required modules
+const express = require("express");
+
+// Create Express application instance
+const app = express();
+
+// Define routes and middleware
+// ...
+
+// Start the server
+const PORT = process.env.PORT || 6000; // Change the port number to 6000
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
 const path = require("path");
 
-const express = require("express");
+
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -22,21 +37,26 @@ app.use(
 );
 
 // Local MongoDB connection string
-const localUri = 'mongodb://localhost:27017/yourdatabase'; // Replace 'yourdatabase' with your actual database name
+const localUri = "mongodb://localhost:27017/yourdatabase"; // Replace 'yourdatabase' with your actual database name
 
 // MongoDB Atlas connection string
-const atlasUri = 'mongodb+srv://vani00712:kOzf43xWuQ7mQAIY@cluster0.6ryucbx.mongodb.net/';
+const atlasUri =
+  "mongodb+srv://vani00712:kOzf43xWuQ7mQAIY@cluster0.6ryucbx.mongodb.net/";
 
 // Set the default connection string based on your environment
-const connectionString = process.env.NODE_ENV === 'production' ? process.env.MONGODBCONNECTIONSTRING : localUri;
+const connectionString =
+  process.env.NODE_ENV === "production"
+    ? process.env.MONGODBCONNECTIONSTRING
+    : localUri;
 
 // Connect to MongoDB
-mongoose.connect(connectionString, {
+mongoose
+  .connect(connectionString, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error('MongoDB connection error:', err));
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Define routes and other configurations here
 // ...
@@ -44,7 +64,7 @@ mongoose.connect(connectionString, {
 // Start the server
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
 
 const store = new MongoDBStore({
@@ -63,7 +83,6 @@ const store = new MongoDBStore({
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
 
 const csrfProtection = csrf();
 
@@ -87,7 +106,7 @@ const fileStorage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  const fileTypes = [ 
+  const fileTypes = [
     "audio/mpeg",
     "audio/ogg",
     "audio/wav",
@@ -173,7 +192,7 @@ app.use((err, req, res, next) => {
 mongoose
   .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
   .then((result) => {
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 6000);
   })
   .catch((err) => {
     console.log(err);
